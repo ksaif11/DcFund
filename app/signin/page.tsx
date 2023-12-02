@@ -1,6 +1,54 @@
-import Link from "next/link";
+"use client"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { app } from "../firebase/firebaseConfig" // Import the 'app' object from your config
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth"
+import { useState } from "react"
 
 const SigninPage = () => {
+  const auth = getAuth(app)
+  const router = useRouter()
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const googleAuthProvider = new GoogleAuthProvider()
+
+  const emailHandler = (event) => {
+    setEmail(event.target.value)
+  }
+
+  const passwordHandler = (event) => {
+    setPassword(event.target.value)
+  }
+
+  //sign in with email
+  const signInUser = () => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        router.push("/page") // Redirect to a different page after successful sign-in
+      })
+      .catch((error) => {
+        alert(error.message)
+      })
+  }
+
+  // popup signin
+  const signUpWithGoogle = () => {
+    signInWithPopup(auth, googleAuthProvider).then((response) => {
+      console.log(response.user)
+      router.push("/page")
+    })
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    signInUser()
+  }
+
   return (
     <>
       <section className="relative z-10 overflow-hidden pt-36 pb-16 md:pb-20 lg:pt-[180px] lg:pb-28">
@@ -14,7 +62,10 @@ const SigninPage = () => {
                 <p className="mb-11 text-center text-base font-medium text-body-color">
                   Login to your account for a faster checkout.
                 </p>
-                <button className="mb-6 flex w-full items-center justify-center rounded-md bg-white p-3 text-base font-medium text-body-color shadow-one hover:text-primary dark:bg-[#242B51] dark:text-body-color dark:shadow-signUp dark:hover:text-white">
+                <button
+                  onClick={signUpWithGoogle}
+                  className="mb-6 flex w-full items-center justify-center rounded-md bg-white p-3 text-base font-medium text-body-color shadow-one hover:text-primary dark:bg-[#242B51] dark:text-body-color dark:shadow-signUp dark:hover:text-white"
+                >
                   <span className="mr-3">
                     <svg
                       width="20"
@@ -57,7 +108,7 @@ const SigninPage = () => {
                   </p>
                   <span className="hidden h-[1px] w-full max-w-[70px] bg-body-color sm:block"></span>
                 </div>
-                <form>
+                <form onSubmit={handleSubmit}>
                   <div className="mb-8">
                     <label
                       htmlFor="email"
@@ -70,6 +121,8 @@ const SigninPage = () => {
                       name="email"
                       placeholder="Enter your Email"
                       className="w-full rounded-md border border-transparent py-3 px-6 text-base text-body-color placeholder-body-color shadow-one outline-none focus:border-primary focus-visible:shadow-none dark:bg-[#242B51] dark:shadow-signUp"
+                      value={email}
+                      onChange={emailHandler}
                     />
                   </div>
                   <div className="mb-8">
@@ -84,6 +137,8 @@ const SigninPage = () => {
                       name="password"
                       placeholder="Enter your Password"
                       className="w-full rounded-md border border-transparent py-3 px-6 text-base text-body-color placeholder-body-color shadow-one outline-none focus:border-primary focus-visible:shadow-none dark:bg-[#242B51] dark:shadow-signUp"
+                      value={password}
+                      onChange={passwordHandler}
                     />
                   </div>
                   <div className="mb-8 flex flex-col justify-between sm:flex-row sm:items-center">
@@ -130,7 +185,10 @@ const SigninPage = () => {
                     </div>
                   </div>
                   <div className="mb-6">
-                    <button className="flex w-full items-center justify-center rounded-md bg-primary py-4 px-9 text-base font-medium text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp">
+                    <button
+                      type="submit"
+                      className="flex w-full items-center justify-center rounded-md bg-primary py-4 px-9 text-base font-medium text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp"
+                    >
                       Sign in
                     </button>
                   </div>
@@ -204,7 +262,7 @@ const SigninPage = () => {
         </div>
       </section>
     </>
-  );
-};
+  )
+}
 
-export default SigninPage;
+export default SigninPage
