@@ -1,21 +1,14 @@
 "use client"
+import React, { useState } from "react"
+import { useAppContext } from "../../context/index"
+
 import Link from "next/link"
-import { useRouter } from "next/navigation"
-import { app } from "../firebase/firebaseConfig" // Import the 'app' object from your config
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  GoogleAuthProvider,
-  signInWithPopup,
-} from "firebase/auth"
-import { useState } from "react"
 
 const SigninPage = () => {
-  const auth = getAuth(app)
-  const router = useRouter()
+  const { signInUser, signUpWithGoogle, logout } = useAppContext()
+  // const router = useRouter()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const googleAuthProvider = new GoogleAuthProvider()
 
   const emailHandler = (event) => {
     setEmail(event.target.value)
@@ -25,37 +18,34 @@ const SigninPage = () => {
     setPassword(event.target.value)
   }
 
-  //sign in with email
-  const signInUser = () => {
-    signInWithEmailAndPassword(auth, email, password)
-      .then(() => {
-        router.push("/page") // Redirect to a different page after successful sign-in
-      })
-      .catch((error) => {
-        alert(error.message)
-      })
+  const handleSignIn = async () => {
+    try {
+      await signUpWithGoogle()
+    } catch (error) {
+      console.log(error)
+    }
   }
 
-  // popup signin
-  const signUpWithGoogle = () => {
-    signInWithPopup(auth, googleAuthProvider).then((response) => {
-      console.log(response.user)
-      router.push("/page")
-    })
+  const handleSignOut = async () => {
+    try {
+      await logout()
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    signInUser()
+    signInUser(email, password)
   }
 
   return (
     <>
-      <section className="relative z-10 overflow-hidden pt-36 pb-16 md:pb-20 lg:pt-[180px] lg:pb-28">
+      <section className="relative z-10 overflow-hidden pb-16 pt-36 md:pb-20 lg:pb-28 lg:pt-[180px]">
         <div className="container">
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4">
-              <div className="mx-auto max-w-[500px] rounded-md bg-primary bg-opacity-5 py-10 px-6 dark:bg-dark sm:p-[60px]">
+              <div className="mx-auto max-w-[500px] rounded-md bg-primary bg-opacity-5 px-6 py-10 dark:bg-dark sm:p-[60px]">
                 <h3 className="mb-3 text-center text-2xl font-bold text-black dark:text-white sm:text-3xl">
                   Sign in to your account
                 </h3>
@@ -63,7 +53,7 @@ const SigninPage = () => {
                   Login to your account for a faster checkout.
                 </p>
                 <button
-                  onClick={signUpWithGoogle}
+                  onClick={handleSignIn}
                   className="mb-6 flex w-full items-center justify-center rounded-md bg-white p-3 text-base font-medium text-body-color shadow-one hover:text-primary dark:bg-[#242B51] dark:text-body-color dark:shadow-signUp dark:hover:text-white"
                 >
                   <span className="mr-3">
@@ -120,7 +110,7 @@ const SigninPage = () => {
                       type="email"
                       name="email"
                       placeholder="Enter your Email"
-                      className="w-full rounded-md border border-transparent py-3 px-6 text-base text-body-color placeholder-body-color shadow-one outline-none focus:border-primary focus-visible:shadow-none dark:bg-[#242B51] dark:shadow-signUp"
+                      className="w-full rounded-md border border-transparent px-6 py-3 text-base text-body-color placeholder-body-color shadow-one outline-none focus:border-primary focus-visible:shadow-none dark:bg-[#242B51] dark:shadow-signUp"
                       value={email}
                       onChange={emailHandler}
                     />
@@ -136,7 +126,7 @@ const SigninPage = () => {
                       type="password"
                       name="password"
                       placeholder="Enter your Password"
-                      className="w-full rounded-md border border-transparent py-3 px-6 text-base text-body-color placeholder-body-color shadow-one outline-none focus:border-primary focus-visible:shadow-none dark:bg-[#242B51] dark:shadow-signUp"
+                      className="w-full rounded-md border border-transparent px-6 py-3 text-base text-body-color placeholder-body-color shadow-one outline-none focus:border-primary focus-visible:shadow-none dark:bg-[#242B51] dark:shadow-signUp"
                       value={password}
                       onChange={passwordHandler}
                     />
@@ -187,7 +177,7 @@ const SigninPage = () => {
                   <div className="mb-6">
                     <button
                       type="submit"
-                      className="flex w-full items-center justify-center rounded-md bg-primary py-4 px-9 text-base font-medium text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp"
+                      className="flex w-full items-center justify-center rounded-md bg-primary px-9 py-4 text-base font-medium text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp"
                     >
                       Sign in
                     </button>
@@ -203,7 +193,7 @@ const SigninPage = () => {
             </div>
           </div>
         </div>
-        <div className="absolute top-0 left-0 z-[-1]">
+        <div className="absolute left-0 top-0 z-[-1]">
           <svg
             width="1440"
             height="969"

@@ -23,6 +23,32 @@
       }
     ]
   },
-  "include": ["next-env.d.ts", ".next/types/**/*.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    ".next/types/**/*.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "components/aftelogin/form/RangeInput.jsx",
+    "components/aftelogin/form/FormInput.jsx",
+    "components/aftelogin/Layout/Topbar.jsx",
+    "components/aftelogin/Layout/Sidebar.jsx",
+    "components/aftelogin/Layout/Searchbar.jsx",
+    "components/aftelogin/Layout/index.jsx",
+    "components/aftelogin/modals/AlertModal.jsx",
+    "components/aftelogin/ui/Navlink.jsx",
+    "components/aftelogin/ui/ClientButton.jsx",
+    "components/aftelogin/utils/getDaysLeft.jsx",
+    "components/aftelogin/utils/constants.jsx",
+    "components/aftelogin/utils/connectBlockchain.jsx",
+    "app/api/total/route.jsx",
+    "app/api/campaigns/[id]/route.jsx",
+    "app/api/campaigns/route.jsx",
+    "app/afterlogin/account/page.jsx",
+    "app/afterlogin/campaigns/page.jsx",
+    "app/afterlogin/campaigns/[title]/page.jsx",
+    "app/afterlogin/search/page.jsx",
+    "app/afterlogin/create/page.jsx",
+    "context/index.jsx"
+  ],
   "exclude": ["node_modules"]
 }

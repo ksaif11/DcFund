@@ -1,64 +1,43 @@
 "use client"
-
+import React, { useState } from "react"
+import { useAppContext } from "../../context/index" // Import the context hook
 import Link from "next/link"
-import { app } from "../firebase/firebaseConfig" // Import the 'app' object from your config
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
-import { useState } from "react"
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth"
-import { useRouter } from "next/navigation"
 
 const SignupPage = () => {
-  const auth = getAuth(app) // Initialize auth using the 'app' object
-  const router = useRouter()
-  const [data, setData] = useState("")
+  const { signUpWithGoogle, signInUser } = useAppContext() // Access context values
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  let googleAuthProvider = new GoogleAuthProvider()
+  const [fullName, setFullName] = useState("")
 
-  const userNameHandler = (event) => {
-    setData(event.target.value)
+  const handleSignUpWithGoogle = () => {
+    signUpWithGoogle() // Call the signUpWithGoogle function from context
   }
 
-  const emailHandler = (event) => {
+  const handleSignInUser = (e) => {
+    e.preventDefault()
+    signInUser(email, password) // Call the signInUser function from context
+  }
+
+  // Event handlers for input fields
+  const handleFullNameChange = (event) => {
+    setFullName(event.target.value)
+  }
+
+  const handleEmailChange = (event) => {
     setEmail(event.target.value)
   }
 
-  const passwordHandler = (event) => {
+  const handlePasswordChange = (event) => {
     setPassword(event.target.value)
   }
 
-  //signup with email
-  const createUser = () => {
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((response) => {
-        console.log("User created:", response.user)
-        router.push("/page")
-      })
-      .catch((error) => {
-        alert(error.message)
-      })
-  }
-
-  //popup sign in
-  const signUpWithGoogle = () => {
-    signInWithPopup(auth, googleAuthProvider).then((response) => {
-      console.log(response.user)
-      router.push("/page")
-    })
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault() // Prevent the default form submission behavior
-    createUser()
-  }
-
   return (
-    <>
-      <section className="relative z-10 overflow-hidden pt-36 pb-16 md:pb-20 lg:pt-[180px] lg:pb-28">
+    <div>
+      <section className="relative z-10 overflow-hidden pb-16 pt-36 md:pb-20 lg:pb-28 lg:pt-[180px]">
         <div className="container">
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4">
-              <div className="mx-auto max-w-[500px] rounded-md bg-primary bg-opacity-5 py-10 px-6 dark:bg-dark sm:p-[60px]">
+              <div className="mx-auto max-w-[500px] rounded-md bg-primary bg-opacity-5 px-6 py-10 dark:bg-dark sm:p-[60px]">
                 <h3 className="mb-3 text-center text-2xl font-bold text-black dark:text-white sm:text-3xl">
                   Create your account
                 </h3>
@@ -66,7 +45,7 @@ const SignupPage = () => {
                   It’s totally free and super easy
                 </p>
                 <button
-                  onClick={signUpWithGoogle}
+                  onClick={handleSignUpWithGoogle}
                   className="mb-6 flex w-full items-center justify-center rounded-md bg-white p-3 text-base font-medium text-body-color shadow-one hover:text-primary dark:bg-[#242B51] dark:text-body-color dark:shadow-signUp dark:hover:text-white"
                 >
                   <span className="mr-3">
@@ -111,7 +90,7 @@ const SignupPage = () => {
                   </p>
                   <span className="hidden h-[1px] w-full max-w-[60px] bg-body-color sm:block"></span>
                 </div>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSignInUser}>
                   <div className="mb-8">
                     <label
                       htmlFor="name"
@@ -124,9 +103,9 @@ const SignupPage = () => {
                       type="text"
                       name="name"
                       placeholder="Enter your full name"
-                      className="w-full rounded-md border border-transparent py-3 px-6 text-base text-body-color placeholder-body-color shadow-one outline-none focus:border-primary focus-visible:shadow-none dark:bg-[#242B51] dark:shadow-signUp"
-                      value={data}
-                      onChange={userNameHandler}
+                      className="w-full rounded-md border border-transparent px-6 py-3 text-base text-body-color placeholder-body-color shadow-one outline-none focus:border-primary focus-visible:shadow-none dark:bg-[#242B51] dark:shadow-signUp"
+                      value={fullName}
+                      onChange={handleFullNameChange}
                     />
                   </div>
                   <div className="mb-8">
@@ -141,9 +120,9 @@ const SignupPage = () => {
                       type="email"
                       name="email"
                       placeholder="Enter your Email"
-                      className="w-full rounded-md border border-transparent py-3 px-6 text-base text-body-color placeholder-body-color shadow-one outline-none focus:border-primary focus-visible:shadow-none dark:bg-[#242B51] dark:shadow-signUp"
+                      className="w-full rounded-md border border-transparent px-6 py-3 text-base text-body-color placeholder-body-color shadow-one outline-none focus:border-primary focus-visible:shadow-none dark:bg-[#242B51] dark:shadow-signUp"
                       value={email}
-                      onChange={emailHandler}
+                      onChange={handleEmailChange}
                     />
                   </div>
                   <div className="mb-8">
@@ -158,9 +137,9 @@ const SignupPage = () => {
                       type="password"
                       name="password"
                       placeholder="Enter your Password"
-                      className="w-full rounded-md border border-transparent py-3 px-6 text-base text-body-color placeholder-body-color shadow-one outline-none focus:border-primary focus-visible:shadow-none dark:bg-[#242B51] dark:shadow-signUp"
+                      className="w-full rounded-md border border-transparent px-6 py-3 text-base text-body-color placeholder-body-color shadow-one outline-none focus:border-primary focus-visible:shadow-none dark:bg-[#242B51] dark:shadow-signUp"
                       value={password}
-                      onChange={passwordHandler}
+                      onChange={handlePasswordChange}
                     />
                   </div>
                   <div className="mb-8 flex">
@@ -210,7 +189,7 @@ const SignupPage = () => {
                   <div className="mb-6">
                     <button
                       type="submit"
-                      className="flex w-full items-center justify-center rounded-md bg-primary py-4 px-9 text-base font-medium text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp"
+                      className="flex w-full items-center justify-center rounded-md bg-primary px-9 py-4 text-base font-medium text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp"
                     >
                       Sign up
                     </button>
@@ -284,7 +263,7 @@ const SignupPage = () => {
           </svg>
         </div>
       </section>
-    </>
+    </div>
   )
 }
 
