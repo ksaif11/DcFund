@@ -43,7 +43,7 @@ const SearchPage = async ({ searchParams, user }) => {
   if (campaigns === null)
     return (
       <div>
-        <p className="text-neutral-400 text-lg">
+        <p className="text-neutral-400 text-lg mt-10">
           Please search for the campaigns you want in the search box above.
         </p>
       </div>

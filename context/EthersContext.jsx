@@ -7,7 +7,6 @@ import { toast } from "react-toastify"
 import { createContext, useContext, useEffect, useState } from "react"
 
 import SmartContract from "../smatcontracts/artifacts/contracts/CrowdFunding.sol/CrowdFunding.json"
-// import SmartContract from "../../../smatcontracts/artifacts/contracts/CrowdFunding.sol/CrowdFunding.json"
 
 const EthersContext = createContext()
 
@@ -20,7 +19,7 @@ export const EthersProvider = ({ children }) => {
 
   useEffect(() => {
     const initEthers = async () => {
-      const provider = new ethers.BrowserProvider(
+      const provider = new ethers.JsonRpcProvider(
         "https://eth-sepolia.g.alchemy.com/v2/PlYFXvnPBEJJD1q7oWJWVb26bBDFlouo"
       )
       const contractInstance = new ethers.Contract(
@@ -42,8 +41,8 @@ export const EthersProvider = ({ children }) => {
 
     if (window.ethereum !== undefined) {
       await window.ethereum.request({ method: "eth_requestAccounts" })
-      const connectedProvider = new ethers.BrowserProvider(window.ethereum)
-      const signer = await connectedProvider.getSigner()
+      const connectedProvider = new ethers.WebSocketProvider(window.ethereum)
+      const signer = connectedProvider.getSigner()
       const contractInstance = new ethers.Contract(
         "0x16815fa26a70A3A1bfdc11707f9780783F9FF2aB",
         SmartContract["abi"],

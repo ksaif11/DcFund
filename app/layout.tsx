@@ -6,6 +6,7 @@ import ScrollToTop from "@/components/ScrollToTop"
 import "node_modules/react-modal-video/css/modal-video.css"
 import "../styles/index.css"
 import { Appwrapper } from "context/index"
+// import { EthersProvider } from "@/context/EthersContext"
 
 export default function RootLayout({
   children,
@@ -21,6 +22,7 @@ export default function RootLayout({
       <head />
 
       <body className="dark:bg-black">
+        {/* <EthersProvider> */}
         <Appwrapper>
           <Providers>
             <Header />
@@ -29,6 +31,7 @@ export default function RootLayout({
             <ScrollToTop />
           </Providers>
         </Appwrapper>
+        {/* </EthersProvider> */}
       </body>
     </html>
   )
