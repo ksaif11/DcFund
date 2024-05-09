@@ -38,7 +38,7 @@ const WithdrawModal = ({
       if (amount <= 0) return toast.error("Please enter a valid amount")
 
       try {
-        await contract.withdraw(campaignId, ethers.utils.parseEther(amount), {
+        await contract.withdraw(campaignId, ethers.parseEther(amount), {
           gasLimit: 1000000,
         })
 
@@ -53,10 +53,10 @@ const WithdrawModal = ({
   }
 
   return (
-    <main className="fixed top-0 left-0 z-50 flex h-[100vh] w-full items-center justify-center bg-[rgba(0,0,0,.7)] p-4">
+    <main className="fixed left-0 top-0 z-50 flex h-[100vh] w-full items-center justify-center bg-[rgba(0,0,0,.7)] p-4">
       <div
         ref={modalRef}
-        className="bg-neutral-800 sm:justify-normal flex h-full w-full flex-col items-center justify-center rounded-lg p-4 sm:block sm:h-auto sm:p-8 md:w-2/3 lg:w-1/2 xl:w-1/3"
+        className="bg-neutral-800 flex h-full w-full flex-col items-center justify-center rounded-lg p-4 sm:block sm:h-auto sm:justify-normal sm:p-8 md:w-2/3 lg:w-1/2 xl:w-1/3"
       >
         <div className="flex flex-col gap-4 sm:flex-row">
           <div className="flex w-full flex-col items-center">
@@ -89,14 +89,14 @@ const WithdrawModal = ({
           <ClientButton
             loading={loading}
             onClick={() => handleClick("withdraw")}
-            className="bg-emerald-500 border-emerald-500 hover:border-emerald-600 hover:bg-emerald-600 rounded-lg border-2 py-2 px-4 transition-all duration-200"
+            className="bg-emerald-500 border-emerald-500 hover:border-emerald-600 hover:bg-emerald-600 rounded-lg border-2 px-4 py-2 transition-all duration-200"
           >
             Withdraw
           </ClientButton>
           <ClientButton
             loading={loading}
             onClick={() => handleClick("cancel")}
-            className="border-emerald-500 text-emerald-500 hover:border-emerald-600 hover:bg-emerald-600 hover:text-neutral-200 rounded-lg border-2 py-2 px-4 transition-all duration-200"
+            className="border-emerald-500 text-emerald-500 hover:border-emerald-600 hover:bg-emerald-600 hover:text-neutral-200 rounded-lg border-2 px-4 py-2 transition-all duration-200"
           >
             Cancel
           </ClientButton>

@@ -44,7 +44,7 @@ const Create = () => {
       setLoading(true)
 
       const { title, description, imageUrl } = formValues
-      const target = ethers.utils.parseEther(formValues.target).toString() // Corrected method
+      const target = ethers.parseEther(formValues.target).toString() // Corrected method
       const deadline = new Date(formValues.deadline).getTime()
 
       await contract.createCampaign(

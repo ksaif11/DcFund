@@ -8,7 +8,7 @@ export async function GET() {
 
     const total = await contract.totalCollected()
     return NextResponse.json(
-      { total: ethers.utils.formatEther(total.toString()) },
+      { total: ethers.formatEther(total.toString()) },
       { status: 200 }
     )
   } catch (error) {

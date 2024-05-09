@@ -113,8 +113,7 @@
 // export default Card
 import Image from "next/image"
 import { useState } from "react"
-import { useRouter } from "next/router"
-import { ethers } from "ethers"
+import { useRouter } from "next/navigation"
 
 import Logo from "../../public/Logo.png"
 import getDaysLeft from "./utils/getDaysLeft"
