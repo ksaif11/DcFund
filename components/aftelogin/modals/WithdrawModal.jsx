@@ -6,7 +6,7 @@ import React, { useEffect, useRef, useState } from "react"
 
 import { toast } from "react-toastify"
 import { ClientButton, RangeInput } from ".."
-import { useEthersContext } from "../contexts/EthersContext"
+import { useEthersContext } from "../../../context/EthersContext"
 
 const WithdrawModal = ({
   setIsOpen,

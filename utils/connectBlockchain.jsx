@@ -1,5 +1,6 @@
 import { ethers } from "ethers"
-import SmartContract from "../../../smatcontracts/artifacts/contracts/CrowdFunding.sol/CrowdFunding.json"
+
+import SmartContract from "../smatcontracts/artifacts/contracts/CrowdFunding.sol/CrowdFunding.json"
 
 export default () => {
   const provider = new ethers.JsonRpcProvider(

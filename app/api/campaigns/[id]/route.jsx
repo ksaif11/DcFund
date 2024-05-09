@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import connectBlockchain from "../../../../components/aftelogin/utils/connectBlockchain"
+import connectBlockchain from "../../../../utils/connectBlockchain"
 
 export async function PUT(req, { params }) {
   try {

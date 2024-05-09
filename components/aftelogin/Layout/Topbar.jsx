@@ -8,10 +8,10 @@ import { useEffect, useRef, useState } from "react"
 
 import Searchbar from "./Searchbar"
 import Logo from "../../../public/Logo.png"
-import { navLinks } from "../utils/constants"
+import { navLinks } from "../../../utils/constants"
 import ClientButton from "../ui/ClientButton"
 import Navlink from "../ui/Navlink"
-import { useEthersContext } from "../contexts/EthersContext"
+import { useEthersContext } from "../../../context/EthersContext"
 
 const Topbar = () => {
   const router = useRouter()

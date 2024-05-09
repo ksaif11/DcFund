@@ -1,6 +1,6 @@
 import { ethers } from "ethers"
 import { NextResponse } from "next/server"
-import connectBlockchain from "../../../components/aftelogin/utils/connectBlockchain"
+import connectBlockchain from "../../../utils/connectBlockchain"
 
 export async function GET(req) {
   try {

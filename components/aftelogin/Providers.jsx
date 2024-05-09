@@ -1,5 +1,5 @@
 "use client"
-import { EthersProvider } from "./contexts/EthersContext"
+import { EthersProvider } from "../../context/EthersContext"
 
 const Providers = ({ children }) => {
   return <EthersProvider>{children}</EthersProvider>

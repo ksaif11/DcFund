@@ -5,9 +5,9 @@ import { useRouter } from "next/navigation"
 import { ethers } from "ethers"
 import { FiLogOut } from "react-icons/fi"
 import Logo from "../../../public/Logo.png"
-import { navLinks } from "../utils/constants"
+import { navLinks } from "../../../utils/constants"
 import { ClientButton, Navlink } from "../index"
-import { useEthersContext } from "../contexts/EthersContext"
+import { useEthersContext } from "../../../context/EthersContext"
 
 const Sidebar = () => {
   const router = useRouter()

@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation"
 import { FaEthereum } from "react-icons/fa"
 
 import { ClientButton, FormInput } from "@/components/aftelogin"
-import { useEthersContext } from "../../../components/aftelogin/contexts/EthersContext"
+import { useEthersContext } from "../../../context/EthersContext"
 import { toast } from "react-toastify"
 
 const Create = () => {
