@@ -132,7 +132,7 @@ const Card = ({ campaign, user }) => {
 
     setSelectedCampaign(campaign)
     const title = campaign.title.replace(/\s/g, "-").toLowerCase()
-    router.push(`/campaigns/${title}`)
+    router.push(`/afterlogin/campaigns/${title}`)
   }
 
   const handleClickButton = (e, type) => {
