@@ -1,25 +1,26 @@
-import React, { useEffect, useState } from "react"
-import { useAppContext } from "../context/index"
+"use client";
+import React, { useEffect, useState } from "react";
+import { useAppContext } from "../../context/index";
 
 function Page() {
-  const { user } = useAppContext()
-  const [loading, setLoading] = useState(true)
+  const { user } = useAppContext();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const checkAuthentication = async () => {
-      await new Promise((resolve) => setTimeout(resolve, 50))
-      setLoading(false)
-    }
-    checkAuthentication()
-  }, [user])
+      await new Promise((resolve) => setTimeout(resolve, 50));
+      setLoading(false);
+    };
+    checkAuthentication();
+  }, [user]);
 
   if (loading) {
-    return <div>Loading...</div>
+    return <div>Loading...</div>;
   }
 
   if (!user) {
     // If user is not logged in, redirect to login page or show a message
-    return <div>Please log in to view this page.</div>
+    return <div>Please log in to view this page.</div>;
   }
 
   // If user is logged in, render the page content
@@ -30,7 +31,7 @@ function Page() {
         protected route.
       </p>
     </div>
-  )
+  );
 }
 
-export default Page
+export default Page;

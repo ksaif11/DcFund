@@ -1,42 +1,42 @@
-import Image from "next/image"
+import Image from "next/image";
 
-import Card from "@/components/aftelogin/Card"
-import Logo from "../../public/Logo.png"
+import Card from "@/components/afterlogin/Card";
+import Logo from "../../public/Logo.png";
 
 const fetchCampaigns = async () => {
   const res = await fetch(`http://localhost:3000/api/campaigns`, {
     method: "GET",
     cache: "no-cache",
-  })
+  });
 
-  const data = await res.json()
-  var campaigns = data.campaigns
+  const data = await res.json();
+  var campaigns = data.campaigns;
 
-  if (!campaigns) campaigns = []
+  if (!campaigns) campaigns = [];
 
-  campaigns.sort((a, b) => b.collectedAmount - a.collectedAmount)
+  campaigns.sort((a, b) => b.collectedAmount - a.collectedAmount);
 
-  const tops = campaigns.slice(0, 9)
+  const tops = campaigns.slice(0, 9);
   const donationCount = campaigns.reduce(
     (total, campaign) => total + campaign.donations.length,
-    0
-  )
+    0,
+  );
 
-  return { campaigns: tops, donationCount, campaignCount: campaigns.length }
-}
+  return { campaigns: tops, donationCount, campaignCount: campaigns.length };
+};
 
 const fetchTotalCollected = async () => {
   const res = await fetch(`http://localhost:3000/api/total`, {
     method: "GET",
     cache: "no-cache",
-  })
-  const data = await res.json()
-  return data.total || 0
-}
+  });
+  const data = await res.json();
+  return data.total || 0;
+};
 
 const Home = async () => {
-  const totalCollected = await fetchTotalCollected()
-  const { campaigns, campaignCount, donationCount } = await fetchCampaigns()
+  const totalCollected = await fetchTotalCollected();
+  const { campaigns, campaignCount, donationCount } = await fetchCampaigns();
 
   return (
     <div>
@@ -99,7 +99,7 @@ const Home = async () => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

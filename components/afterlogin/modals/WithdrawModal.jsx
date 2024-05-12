@@ -1,12 +1,12 @@
-"use client"
+"use client";
 
-import { ethers } from "ethers"
+import { ethers } from "ethers";
 
-import React, { useEffect, useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react";
 
-import { toast } from "react-toastify"
-import { ClientButton, RangeInput } from ".."
-import { useEthersContext } from "../../../context/EthersContext"
+import { toast } from "react-toastify";
+import { ClientButton, RangeInput } from "../index";
+import { useEthersContext } from "@/context/EthersContext";
 
 const WithdrawModal = ({
   setIsOpen,
@@ -14,43 +14,43 @@ const WithdrawModal = ({
   totalCollected,
   totalWithdrawn,
 }) => {
-  const modalRef = useRef(null)
-  const { contract } = useEthersContext()
+  const modalRef = useRef(null);
+  const { contract } = useEthersContext();
 
-  const [amount, setAmount] = useState(0)
-  const [loading, setLoading] = useState(false)
+  const [amount, setAmount] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     function handleClickOutside(event) {
       if (modalRef.current && !modalRef.current.contains(event.target))
-        setIsOpen(false)
+        setIsOpen(false);
     }
 
-    document.addEventListener("mousedown", handleClickOutside)
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside)
-    }
-  }, [modalRef])
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [modalRef]);
 
   const handleClick = async (type) => {
-    setLoading(true)
+    setLoading(true);
     if (type === "withdraw") {
-      if (amount <= 0) return toast.error("Please enter a valid amount")
+      if (amount <= 0) return toast.error("Please enter a valid amount");
 
       try {
         await contract.withdraw(campaignId, ethers.parseEther(amount), {
           gasLimit: 1000000,
-        })
+        });
 
-        toast.success("Withdraw Successful!")
+        toast.success("Withdraw Successful!");
       } catch (error) {
-        toast.error("Withdraw Failed!")
+        toast.error("Withdraw Failed!");
       }
     }
 
-    setLoading(false)
-    setIsOpen(false)
-  }
+    setLoading(false);
+    setIsOpen(false);
+  };
 
   return (
     <main className="fixed left-0 top-0 z-50 flex h-[100vh] w-full items-center justify-center bg-[rgba(0,0,0,.7)] p-4">
@@ -103,7 +103,7 @@ const WithdrawModal = ({
         </div>
       </div>
     </main>
-  )
-}
+  );
+};
 
-export default WithdrawModal
+export default WithdrawModal;

@@ -1,33 +1,37 @@
-"use client"
-import Image from "next/image"
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import Logo from "../../public/Logo.png"
-import getDaysLeft from "../../utils/getDaysLeft"
-import { useEthersContext } from "../../context/EthersContext"
-import { AlertModal, ClientButton, WithdrawModal } from "."
+"use client";
+import Image from "next/image";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Logo from "@/public/Logo.png";
+import getDaysLeft from "@/utils/getDaysLeft";
+import { useEthersContext } from "@/context/EthersContext";
+import {
+  AlertModal,
+  ClientButton,
+  WithdrawModal,
+} from "@/components/afterlogin/index";
 
 const Card = ({ campaign, user }) => {
-  const router = useRouter()
-  const { setSelectedCampaign } = useEthersContext()
+  const router = useRouter();
+  const { setSelectedCampaign } = useEthersContext();
 
-  const [isAlertOpen, setIsAlertOpen] = useState(false)
-  const [isWithdrawOpen, setIsWithdrawOpen] = useState(false)
+  const [isAlertOpen, setIsAlertOpen] = useState(false);
+  const [isWithdrawOpen, setIsWithdrawOpen] = useState(false);
 
   const handleClickCard = () => {
-    if (isAlertOpen || isWithdrawOpen) return
+    if (isAlertOpen || isWithdrawOpen) return;
 
-    setSelectedCampaign(campaign)
-    const title = campaign.title.replace(/\s/g, "-").toLowerCase()
-    router.push(`/afterlogin/campaigns/${title}`)
-  }
+    setSelectedCampaign(campaign);
+    const title = campaign.title.replace(/\s/g, "-").toLowerCase();
+    router.push(`/afterlogin/campaigns/${title}`);
+  };
 
   const handleClickButton = (e, type) => {
-    e.stopPropagation()
+    e.stopPropagation();
 
-    if (type === "withdraw") setIsWithdrawOpen(true)
-    else setIsAlertOpen(true)
-  }
+    if (type === "withdraw") setIsWithdrawOpen(true);
+    else setIsAlertOpen(true);
+  };
 
   return (
     <div
@@ -105,7 +109,7 @@ const Card = ({ campaign, user }) => {
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Card
+export default Card;

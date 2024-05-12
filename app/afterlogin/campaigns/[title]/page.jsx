@@ -1,54 +1,57 @@
-"use client"
+"use client";
 
-import Image from "next/image"
-import { ethers } from "ethers"
-import { toast } from "react-toastify"
-import { useEffect, useState } from "react"
-import { useRouter } from "next/navigation"
-import { FaEthereum } from "react-icons/fa"
+import Image from "next/image";
+import { ethers } from "ethers";
+import { toast } from "react-toastify";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { FaEthereum } from "react-icons/fa";
 
-import getDaysLeft from "../../../../utils/getDaysLeft"
-import Logo from "../../../../public/Logo.png"
-import { ClientButton, FormInput } from "../../../../components/aftelogin/index"
-import { useEthersContext } from "../../../../context/EthersContext"
+import getDaysLeft from "../../../../utils/getDaysLeft";
+import Logo from "../../../../public/Logo.png";
+import {
+  ClientButton,
+  FormInput,
+} from "../../../../components/afterlogin/index";
+import { useEthersContext } from "../../../../context/EthersContext";
 
 const CampaignDetails = () => {
-  const router = useRouter()
-  const { selectedCampaign: campaign, contract } = useEthersContext()
-  const [amount, setAmount] = useState(0)
-  const [topDonations, setTopDonations] = useState([])
-  const [loading, setLoading] = useState(false)
+  const router = useRouter();
+  const { selectedCampaign: campaign, contract } = useEthersContext();
+  const [amount, setAmount] = useState(0);
+  const [topDonations, setTopDonations] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (campaign === null) return router.back()
+    if (campaign === null) return router.back();
 
-    campaign.donations.sort((a, b) => b.amount - a.amount)
-    const tops = campaign.donations.slice(0, 10)
-    setTopDonations(tops)
-  }, [])
+    campaign.donations.sort((a, b) => b.amount - a.amount);
+    const tops = campaign.donations.slice(0, 10);
+    setTopDonations(tops);
+  }, []);
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    if (amount === 0) return toast.error("Please enter an amount")
+    e.preventDefault();
+    if (amount === 0) return toast.error("Please enter an amount");
     if (getDaysLeft(campaign.deadline) <= 0)
-      return toast.error("Campaign has ended")
+      return toast.error("Campaign has ended");
 
-    setLoading(true)
+    setLoading(true);
 
     try {
       await contract.donate(campaign.id, {
         value: ethers.parseEther(amount),
         gasLimit: 1000000,
-      })
+      });
 
-      toast.success("Donation Successful!")
+      toast.success("Donation Successful!");
     } catch (error) {
-      toast.error("Donation Failed!")
+      toast.error("Donation Failed!");
     }
 
-    setAmount(0)
-    setLoading(false)
-  }
+    setAmount(0);
+    setLoading(false);
+  };
 
   return (
     <main>
@@ -174,7 +177,7 @@ const CampaignDetails = () => {
         )}
       </div>
     </main>
-  )
-}
+  );
+};
 
-export default CampaignDetails
+export default CampaignDetails;

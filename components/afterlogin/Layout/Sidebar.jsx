@@ -1,22 +1,22 @@
-"use client"
-import Link from "next/link"
-import Image from "next/image"
-import { useRouter } from "next/navigation"
-import { ethers } from "ethers"
-import { FiLogOut } from "react-icons/fi"
-import Logo from "../../../public/Logo.png"
-import { navLinks } from "../../../utils/constants"
-import { ClientButton, Navlink } from "../index"
-import { useEthersContext } from "../../../context/EthersContext"
+"use client";
+import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { ethers } from "ethers";
+import { FiLogOut } from "react-icons/fi";
+import Logo from "@/public/Logo.png";
+import { navLinks } from "@/utils/constants";
+import { ClientButton, Navlink } from "../index";
+import { useEthersContext } from "@/context/EthersContext";
 
 const Sidebar = () => {
-  const router = useRouter()
-  const { signer, disconnectWallet } = useEthersContext()
+  const router = useRouter();
+  const { signer, disconnectWallet } = useEthersContext();
 
   const handleDisconnect = () => {
-    disconnectWallet()
-    router.push("/")
-  }
+    disconnectWallet();
+    router.push("/");
+  };
 
   return (
     <aside className="sticky left-4 top-5  hidden h-full flex-col bg-black md:flex">
@@ -37,7 +37,7 @@ const Sidebar = () => {
                 title={link.title}
                 setToggleDrawer={() => {}}
               />
-            ) : null
+            ) : null,
           )}
         </div>
         {signer && (
@@ -52,7 +52,7 @@ const Sidebar = () => {
         )}
       </div>
     </aside>
-  )
-}
+  );
+};
 
-export default Sidebar
+export default Sidebar;
