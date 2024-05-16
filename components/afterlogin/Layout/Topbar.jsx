@@ -1,36 +1,36 @@
-"use client"
-import Link from "next/link"
-import Image from "next/image"
-import { FiLogOut } from "react-icons/fi"
-import { useRouter } from "next/navigation"
-import { RiMenuFill } from "react-icons/ri"
-import { useEffect, useRef, useState } from "react"
+"use client";
+import Link from "next/link";
+import Image from "next/image";
+import { FiLogOut } from "react-icons/fi";
+import { useRouter } from "next/navigation";
+import { RiMenuFill } from "react-icons/ri";
+import { useEffect, useRef, useState } from "react";
 
-import Searchbar from "./Searchbar"
-import Logo from "../../../public/Logo.png"
-import { navLinks } from "../utils/constants"
-import ClientButton from "../ui/ClientButton"
-import Navlink from "../ui/Navlink"
-import { useEthersContext } from "../contexts/EthersContext"
+import Searchbar from "./Searchbar";
+import Logo from "@/public/Logo.png";
+import { navLinks } from "@/utils/constants";
+import ClientButton from "@/components/afterlogin/ui/ClientButton";
+import Navlink from "@/components/afterlogin/ui/Navlink";
+import { useEthersContext } from "@/context/EthersContext";
 
 const Topbar = () => {
-  const router = useRouter()
-  const drawerRef = useRef(null)
+  const router = useRouter();
+  const drawerRef = useRef(null);
   const { signer, loading, connectWallet, disconnectWallet } =
-    useEthersContext()
-  const [toggleDrawer, setToggleDrawer] = useState(false)
+    useEthersContext();
+  const [toggleDrawer, setToggleDrawer] = useState(false);
 
   useEffect(() => {
     function handleClickOutside(event) {
       if (drawerRef.current && !drawerRef.current.contains(event.target))
-        setToggleDrawer(false)
+        setToggleDrawer(false);
     }
 
-    document.addEventListener("mousedown", handleClickOutside)
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside)
-    }
-  }, [drawerRef])
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [drawerRef]);
 
   return (
     <div className="mt-30 sticky top-20  flex w-full flex-col-reverse items-center justify-between  bg-[#13131a] pb-4 sm:flex-row md:relative md:bg-transparent md:pb-0">
@@ -112,7 +112,7 @@ const Topbar = () => {
                 title={link.title}
                 setToggleDrawer={setToggleDrawer}
               />
-            ) : null
+            ) : null,
           )}
           {signer && (
             <ClientButton
@@ -126,7 +126,7 @@ const Topbar = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Topbar
+export default Topbar;

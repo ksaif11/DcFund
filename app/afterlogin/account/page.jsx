@@ -1,42 +1,43 @@
-"use client"
-import React, { useEffect, useState } from "react"
-import Image from "next/image"
-import { Card } from "../../../components/aftelogin"
-import Logo from "/public/Logo.png"
-import { useEthersContext } from "../../../components/aftelogin/contexts/EthersContext"
+"use client";
+import React, { useEffect, useState } from "react";
+import Image from "next/image";
+
+import { Card } from "@/components/afterlogin/index";
+import Logo from "/public/Logo.png";
+import { useEthersContext } from "../../../context/EthersContext";
 
 const Account = () => {
-  const { signer } = useEthersContext()
-  const [campaigns, setCampaigns] = useState(null)
-  const [totalCollected, setTotalCollected] = useState(0)
-  const [totalWithdrawn, setTotalWithdrawn] = useState(0)
+  const { signer } = useEthersContext();
+  const [campaigns, setCampaigns] = useState(null);
+  const [totalCollected, setTotalCollected] = useState(0);
+  const [totalWithdrawn, setTotalWithdrawn] = useState(0);
 
   useEffect(() => {
     const fetchCampaigns = async () => {
       const res = await fetch(
-        `http://localhost:3000/api/campaigns?owner=${signer?.address}`
-      )
-      const data = await res.json()
-      var campaigns = data.campaigns
+        `http://localhost:3000/api/campaigns?owner=${signer?.address}`,
+      );
+      const data = await res.json();
+      var campaigns = data.campaigns;
 
-      if (!campaigns) campaigns = []
+      if (!campaigns) campaigns = [];
 
       const totalCollected = campaigns.reduce(
         (acc, campaign) => acc + Number(campaign.collectedAmount),
-        0
-      )
+        0,
+      );
       const totalWithdrawn = campaigns.reduce(
         (acc, campaign) => acc + Number(campaign.withdrawedAmount),
-        0
-      )
+        0,
+      );
 
-      setCampaigns(campaigns)
-      setTotalCollected(totalCollected)
-      setTotalWithdrawn(totalWithdrawn)
-    }
+      setCampaigns(campaigns);
+      setTotalCollected(totalCollected);
+      setTotalWithdrawn(totalWithdrawn);
+    };
 
-    signer?.address && fetchCampaigns()
-  }, [signer?.address])
+    signer?.address && fetchCampaigns();
+  }, [signer?.address]);
 
   if (!signer?.address || campaigns === null) {
     return (
@@ -48,7 +49,7 @@ const Account = () => {
           </p>
         </div>
       </div>
-    )
+    );
   }
 
   return (
@@ -105,7 +106,7 @@ const Account = () => {
         )}
       </div>
     </main>
-  )
-}
+  );
+};
 
-export default Account
+export default Account;

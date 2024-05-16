@@ -1,25 +1,25 @@
-"use client"
-import Link from "next/link"
-import Image from "next/image"
-import { useRouter } from "next/navigation"
-import { ethers } from "ethers"
-import { FiLogOut } from "react-icons/fi"
-import Logo from "../../../public/Logo.png"
-import { navLinks } from "../utils/constants"
-import { ClientButton, Navlink } from "../index"
-import { useEthersContext } from "../contexts/EthersContext"
+"use client";
+import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { ethers } from "ethers";
+import { FiLogOut } from "react-icons/fi";
+import Logo from "@/public/Logo.png";
+import { navLinks } from "@/utils/constants";
+import { ClientButton, Navlink } from "../index";
+import { useEthersContext } from "@/context/EthersContext";
 
 const Sidebar = () => {
-  const router = useRouter()
-  const { signer, disconnectWallet } = useEthersContext()
+  const router = useRouter();
+  const { signer, disconnectWallet } = useEthersContext();
 
   const handleDisconnect = () => {
-    disconnectWallet()
-    router.push("/")
-  }
+    disconnectWallet();
+    router.push("/");
+  };
 
   return (
-    <aside className="sticky left-2 top-2 hidden h-full flex-col bg-black md:flex">
+    <aside className="sticky left-4 top-5  hidden h-full flex-col bg-black md:flex">
       <Link
         href="/afterlogin"
         className="bg-neutral-800 mb-4 flex items-center justify-center rounded-lg p-2"
@@ -27,7 +27,7 @@ const Sidebar = () => {
         <Image src={Logo} alt="dcfund" priority width={40} height={40} />
       </Link>
       <div className="bg-neutral-800 flex min-h-[calc(100vh-96px)] flex-col rounded-lg p-2">
-        <div className="flex flex-col gap-10">
+        <div className="flex flex-col gap-8">
           {navLinks.map((link, index) =>
             signer || index < navLinks.length - 1 ? (
               <Navlink
@@ -37,7 +37,7 @@ const Sidebar = () => {
                 title={link.title}
                 setToggleDrawer={() => {}}
               />
-            ) : null
+            ) : null,
           )}
         </div>
         {signer && (
@@ -52,7 +52,7 @@ const Sidebar = () => {
         )}
       </div>
     </aside>
-  )
-}
+  );
+};
 
-export default Sidebar
+export default Sidebar;

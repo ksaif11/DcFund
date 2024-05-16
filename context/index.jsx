@@ -24,7 +24,7 @@ export function Appwrapper({ children }) {
     signInWithEmailAndPassword(auth, email, password)
       .then(() => {
         // Redirect to a different page after successful sign-in
-        window.location.href = "/" // For client-side routing
+        window.location.href = "/afterlogin" // For client-side routing
       })
       .catch((error) => {
         alert(error.message)

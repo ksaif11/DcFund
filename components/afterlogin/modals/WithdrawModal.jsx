@@ -1,12 +1,12 @@
-"use client"
+"use client";
 
-import { ethers } from "ethers"
+import { ethers } from "ethers";
 
-import React, { useEffect, useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react";
 
-import { toast } from "react-toastify"
-import { ClientButton, RangeInput } from ".."
-import { useEthersContext } from "../contexts/EthersContext"
+import { toast } from "react-toastify";
+import { ClientButton, RangeInput } from "../index";
+import { useEthersContext } from "@/context/EthersContext";
 
 const WithdrawModal = ({
   setIsOpen,
@@ -14,49 +14,49 @@ const WithdrawModal = ({
   totalCollected,
   totalWithdrawn,
 }) => {
-  const modalRef = useRef(null)
-  const { contract } = useEthersContext()
+  const modalRef = useRef(null);
+  const { contract } = useEthersContext();
 
-  const [amount, setAmount] = useState(0)
-  const [loading, setLoading] = useState(false)
+  const [amount, setAmount] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     function handleClickOutside(event) {
       if (modalRef.current && !modalRef.current.contains(event.target))
-        setIsOpen(false)
+        setIsOpen(false);
     }
 
-    document.addEventListener("mousedown", handleClickOutside)
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside)
-    }
-  }, [modalRef])
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [modalRef]);
 
   const handleClick = async (type) => {
-    setLoading(true)
+    setLoading(true);
     if (type === "withdraw") {
-      if (amount <= 0) return toast.error("Please enter a valid amount")
+      if (amount <= 0) return toast.error("Please enter a valid amount");
 
       try {
-        await contract.withdraw(campaignId, ethers.utils.parseEther(amount), {
+        await contract.withdraw(campaignId, ethers.parseEther(amount), {
           gasLimit: 1000000,
-        })
+        });
 
-        toast.success("Withdraw Successful!")
+        toast.success("Withdraw Successful!");
       } catch (error) {
-        toast.error("Withdraw Failed!")
+        toast.error("Withdraw Failed!");
       }
     }
 
-    setLoading(false)
-    setIsOpen(false)
-  }
+    setLoading(false);
+    setIsOpen(false);
+  };
 
   return (
-    <main className="fixed top-0 left-0 z-50 flex h-[100vh] w-full items-center justify-center bg-[rgba(0,0,0,.7)] p-4">
+    <main className="fixed left-0 top-0 z-50 flex h-[100vh] w-full items-center justify-center bg-[rgba(0,0,0,.7)] p-4">
       <div
         ref={modalRef}
-        className="bg-neutral-800 sm:justify-normal flex h-full w-full flex-col items-center justify-center rounded-lg p-4 sm:block sm:h-auto sm:p-8 md:w-2/3 lg:w-1/2 xl:w-1/3"
+        className="bg-neutral-800 flex h-full w-full flex-col items-center justify-center rounded-lg p-4 sm:block sm:h-auto sm:justify-normal sm:p-8 md:w-2/3 lg:w-1/2 xl:w-1/3"
       >
         <div className="flex flex-col gap-4 sm:flex-row">
           <div className="flex w-full flex-col items-center">
@@ -89,21 +89,21 @@ const WithdrawModal = ({
           <ClientButton
             loading={loading}
             onClick={() => handleClick("withdraw")}
-            className="bg-emerald-500 border-emerald-500 hover:border-emerald-600 hover:bg-emerald-600 rounded-lg border-2 py-2 px-4 transition-all duration-200"
+            className="bg-emerald-500 border-emerald-500 hover:border-emerald-600 hover:bg-emerald-600 rounded-lg border-2 px-4 py-2 transition-all duration-200"
           >
             Withdraw
           </ClientButton>
           <ClientButton
             loading={loading}
             onClick={() => handleClick("cancel")}
-            className="border-emerald-500 text-emerald-500 hover:border-emerald-600 hover:bg-emerald-600 hover:text-neutral-200 rounded-lg border-2 py-2 px-4 transition-all duration-200"
+            className="border-emerald-500 text-emerald-500 hover:border-emerald-600 hover:bg-emerald-600 hover:text-neutral-200 rounded-lg border-2 px-4 py-2 transition-all duration-200"
           >
             Cancel
           </ClientButton>
         </div>
       </div>
     </main>
-  )
-}
+  );
+};
 
-export default WithdrawModal
+export default WithdrawModal;

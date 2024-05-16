@@ -1,25 +1,25 @@
-import { Card } from "components/aftelogin/index"
+import { Card } from "@/components/afterlogin/index";
 
 const fetchCampaigns = async (sort) => {
   const res = await fetch(`http://localhost:3000/api/campaigns`, {
     method: "GET",
     cache: "no-cache",
-  })
-  const data = await res.json()
-  var campaigns = data.campaigns
+  });
+  const data = await res.json();
+  var campaigns = data.campaigns;
 
-  if (!campaigns) campaigns = []
+  if (!campaigns) campaigns = [];
 
-  if (sort === undefined || sort === null) return campaigns
-  else if (sort === "newest") return campaigns.slice(-9).reverse()
+  if (sort === undefined || sort === null) return campaigns;
+  else if (sort === "newest") return campaigns.slice(-9).reverse();
 
-  campaigns.sort((a, b) => b.collectedAmount - a.collectedAmount)
-  const tops = campaigns.slice(0, 9)
-  return tops
-}
+  campaigns.sort((a, b) => b.collectedAmount - a.collectedAmount);
+  const tops = campaigns.slice(0, 9);
+  return tops;
+};
 
 const Campaigns = async ({ searchParams }) => {
-  const campaigns = await fetchCampaigns(searchParams.sort)
+  const campaigns = await fetchCampaigns(searchParams.sort);
 
   return (
     <div>
@@ -27,8 +27,8 @@ const Campaigns = async ({ searchParams }) => {
         {!searchParams.sort
           ? `All Campaigns (${campaigns?.length ?? 0})`
           : searchParams.sort === "newest"
-          ? `Newest Campaigns (${campaigns?.length ?? 0})`
-          : `Top Campaigns (${campaigns?.length ?? 0})`}
+            ? `Newest Campaigns (${campaigns?.length ?? 0})`
+            : `Top Campaigns (${campaigns?.length ?? 0})`}
       </h1>
       {campaigns?.length === 0 ? (
         <div className="mt-10 flex  flex-col justify-center gap-4">
@@ -46,7 +46,7 @@ const Campaigns = async ({ searchParams }) => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Campaigns
+export default Campaigns;

@@ -37,9 +37,9 @@
     "components/aftelogin/modals/AlertModal.jsx",
     "components/aftelogin/ui/Navlink.jsx",
     "components/aftelogin/ui/ClientButton.jsx",
-    "components/aftelogin/utils/getDaysLeft.jsx",
-    "components/aftelogin/utils/constants.jsx",
-    "components/aftelogin/utils/connectBlockchain.jsx",
+    "utils/getDaysLeft.jsx",
+    "utils/constants.jsx",
+    "utils/connectBlockchain.jsx",
     "app/api/total/route.jsx",
     "app/api/campaigns/[id]/route.jsx",
     "app/api/campaigns/route.jsx",
@@ -50,5 +50,5 @@
     "app/afterlogin/create/page.jsx",
     "context/index.jsx"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "prettier"]
 }
