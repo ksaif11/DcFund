@@ -42,7 +42,7 @@ const Header = () => {
       className={`header left-0 top-0 z-40 flex w-full items-center bg-transparent ${
         sticky
           ? "!fixed !z-[9999] !bg-white !bg-opacity-80 shadow-sticky backdrop-blur-sm !transition dark:!bg-primary dark:!bg-opacity-20"
-          : "absolute"
+          : "absolute "
       }`}
     >
       <div className="container">
@@ -101,7 +101,7 @@ const Header = () => {
                     : "invisible top-[120%] opacity-0"
                 }`}
               >
-                <ul className="block lg:flex lg:space-x-12">
+                <ul className="block lg:flex ml-[125px] lg:space-x-12">
                   {menuData.map((menuItem, index) => (
                     <li key={menuItem.id} className="group relative">
                       {menuItem.path ? (
@@ -153,7 +153,7 @@ const Header = () => {
               {/* Conditionally render Sign In/Sign Up or Sign Out button */}
               {user ? (
                 <div>
-                  <p>Welcome {user.displayName}</p>
+                  <p>Welcome {user?.displayName}</p>
                   <button
                     onClick={logout}
                     className="hidden px-7 py-3 text-base font-bold text-dark hover:opacity-70 dark:text-white md:block"
