@@ -4,7 +4,7 @@ import { useAppContext } from "../../context/index" // Import the context hook
 import Link from "next/link"
 
 const SignupPage = () => {
-  const { signUpWithGoogle, signInUser } = useAppContext() // Access context values
+  const { signUpWithGoogle, signInUser,signUpWithEmailAndPassword } = useAppContext() // Access context values
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [fullName, setFullName] = useState("")
@@ -15,7 +15,7 @@ const SignupPage = () => {
 
   const handleSignInUser = (e) => {
     e.preventDefault()
-    signInUser(email, password) // Call the signInUser function from context
+    signUpWithEmailAndPassword(email, password) // Call the signInUser function from context
   }
 
   // Event handlers for input fields

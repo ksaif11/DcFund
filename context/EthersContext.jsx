@@ -15,7 +15,8 @@ export const EthersProvider = ({ children }) => {
   const [provider, setProvider] = useState(null);
   const [contract, setContract] = useState(null);
   const [selectedCampaign, setSelectedCampaign] = useState(null);
-
+  // ff1049381835b89e798a1c6c5ebd775eb9e0e611c98b5f1605afaa14adb813a1
+  // 0xD705C9d542e76486d98250894E70D398E6B5f842
   useEffect(() => {
     const initEthers = async () => {
       const provider = new ethers.JsonRpcProvider(

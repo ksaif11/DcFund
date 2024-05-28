@@ -7,11 +7,13 @@ import {
   signInWithPopup,
   signOut,
   onAuthStateChanged,
+  createUserWithEmailAndPassword,
 } from "firebase/auth"
 import { app } from "../app/firebase/firebaseConfig"
 
+
 // Create a context with an initial value
-const AppContext = createContext(null)
+const AppContext = createContext()
 
 export function Appwrapper({ children }) {
   // Use useState hook to manage state
@@ -19,6 +21,21 @@ export function Appwrapper({ children }) {
   const auth = getAuth(app)
   const googleAuthProvider = new GoogleAuthProvider()
 
+  const signUpWithEmailAndPassword =(email, password)=>{
+    createUserWithEmailAndPassword(auth, email, password)
+    .then(() => {
+      // Signed up 
+      window.location.href = "/afterlogin"
+      // ...
+    })
+    .catch((error) => {
+      alert(error.message)
+      console.log("kuch to glt hai ")
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // ..
+    });
+  }
   // Sign in with email
   const signInUser = (email, password) => {
     signInWithEmailAndPassword(auth, email, password)
@@ -27,12 +44,25 @@ export function Appwrapper({ children }) {
         window.location.href = "/afterlogin" // For client-side routing -> /afterlogin
       })
       .catch((error) => {
+        
         alert(error.message)
       })
   }
+  // createUserWithEmailAndPassword(auth, email, password)
+  // .then((userCredential) => {
+  //   // Signed up 
+  //   const user = userCredential.user;
+  //   // ...
+  // })
+  // .catch((error) => {
+  //   const errorCode = error.code;
+  //   const errorMessage = error.message;
+  //   // ..
+  // });
 
   // Popup sign-in with Google
   const signUpWithGoogle = () => {
+   
     signInWithPopup(auth, googleAuthProvider).then((response) => {
       console.log(response.user)
       // Redirect to a different page after successful sign-in
@@ -62,7 +92,7 @@ export function Appwrapper({ children }) {
 
   // Provide the context value to the children
   return (
-    <AppContext.Provider value={{ user, signInUser, signUpWithGoogle, logout }}>
+    <AppContext.Provider value={{ user, signInUser, signUpWithGoogle, signUpWithEmailAndPassword, logout }}>
       {children}
     </AppContext.Provider>
   )
