@@ -21,6 +21,19 @@ export function Appwrapper({ children }) {
   const auth = getAuth(app)
   const googleAuthProvider = new GoogleAuthProvider()
 
+  
+  // Sign in with email
+  const signInUser = (email, password) => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        // Redirect to a different page after successful sign-in
+        window.location.href = "/afterlogin" // For client-side routing -> /afterlogin
+      })
+      .catch((error) => {
+        
+        alert(error.message)
+      })
+  }
   const signUpWithEmailAndPassword =(email, password)=>{
     createUserWithEmailAndPassword(auth, email, password)
     .then(() => {
@@ -36,29 +49,6 @@ export function Appwrapper({ children }) {
       // ..
     });
   }
-  // Sign in with email
-  const signInUser = (email, password) => {
-    signInWithEmailAndPassword(auth, email, password)
-      .then(() => {
-        // Redirect to a different page after successful sign-in
-        window.location.href = "/afterlogin" // For client-side routing -> /afterlogin
-      })
-      .catch((error) => {
-        
-        alert(error.message)
-      })
-  }
-  // createUserWithEmailAndPassword(auth, email, password)
-  // .then((userCredential) => {
-  //   // Signed up 
-  //   const user = userCredential.user;
-  //   // ...
-  // })
-  // .catch((error) => {
-  //   const errorCode = error.code;
-  //   const errorMessage = error.message;
-  //   // ..
-  // });
 
   // Popup sign-in with Google
   const signUpWithGoogle = () => {
