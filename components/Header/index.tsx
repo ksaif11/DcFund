@@ -1,41 +1,41 @@
-import { useEffect, useState } from "react"
-import Link from "next/link"
-import ThemeToggler from "./ThemeToggler"
-import menuData from "./menuData"
-import { useAppContext } from "@/context"
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import ThemeToggler from "./ThemeToggler";
+import menuData from "./menuData";
+import { useAppContext } from "@/context";
 
 const Header = () => {
-  const { user, logout } = useAppContext()
-  const [navbarOpen, setNavbarOpen] = useState(false)
-  const [sticky, setSticky] = useState(false)
-  const [openIndex, setOpenIndex] = useState(-1)
+  const { user, logout } = useAppContext();
+  const [navbarOpen, setNavbarOpen] = useState(false);
+  const [sticky, setSticky] = useState(false);
+  const [openIndex, setOpenIndex] = useState(-1);
 
   const navbarToggleHandler = () => {
-    setNavbarOpen(!navbarOpen)
-  }
+    setNavbarOpen(!navbarOpen);
+  };
 
   const handleStickyNavbar = () => {
     if (window.scrollY >= 80) {
-      setSticky(true)
+      setSticky(true);
     } else {
-      setSticky(false)
+      setSticky(false);
     }
-  }
+  };
 
   useEffect(() => {
-    window.addEventListener("scroll", handleStickyNavbar)
+    window.addEventListener("scroll", handleStickyNavbar);
     return () => {
-      window.removeEventListener("scroll", handleStickyNavbar)
-    }
-  }, [])
+      window.removeEventListener("scroll", handleStickyNavbar);
+    };
+  }, []);
 
   const handleSubmenu = (index) => {
     if (openIndex === index) {
-      setOpenIndex(-1)
+      setOpenIndex(-1);
     } else {
-      setOpenIndex(index)
+      setOpenIndex(index);
     }
-  }
+  };
 
   return (
     <header
@@ -185,7 +185,7 @@ const Header = () => {
         </div>
       </div>
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

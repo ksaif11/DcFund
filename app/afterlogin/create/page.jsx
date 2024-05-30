@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { FaEthereum } from "react-icons/fa";
@@ -82,7 +81,7 @@ const Create = () => {
   return (
     <main className="bg-neutral-800 min-h-[calc(100vh-96px)] w-full rounded-lg">
       <div className="w-content m-auto flex items-center justify-center p-4">
-        <h1 className="bg-neutral-700 w-content mx-auto rounded-lg px-8 py-4 text-center text-2xl font-semibold">
+        <h1 className="bg-black w-content mx-auto rounded-lg px-8 py-4 text-center text-2xl font-semibold">
           Start a Campaign
         </h1>
       </div>
@@ -109,7 +108,7 @@ const Create = () => {
         <FormInput
           label={"Story"}
           placeholder={"Write why you need this money..."}
-          type={"textarea"}
+          type={"text"}
           value={formValues.description}
           onChange={(e) => handleFormInputChange("description", e)}
         />

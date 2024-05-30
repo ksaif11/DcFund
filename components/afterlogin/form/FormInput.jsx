@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 
 const FormInput = ({ type, label, placeholder, value, onChange }) => {
   return (
@@ -6,7 +6,7 @@ const FormInput = ({ type, label, placeholder, value, onChange }) => {
       <span className="text-neutral-400 block text-xl">{label}*</span>
       {type === "textarea" ? (
         <textarea
-          className="bg-neutral-700 text-neutral-300 placeholder-neutral-500 w-full resize-none rounded-lg p-4 outline-none"
+          className="bg-black text-neutral-300 placeholder-neutral-500 w-full resize-none rounded-lg p-4 outline-none"
           placeholder={placeholder}
           onChange={onChange}
           value={value}
@@ -26,7 +26,7 @@ const FormInput = ({ type, label, placeholder, value, onChange }) => {
         />
       )}
     </label>
-  )
-}
+  );
+};
 
-export default FormInput
+export default FormInput;
