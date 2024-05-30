@@ -1,7 +1,7 @@
-import React from "react"
-import Image from "next/image"
+import React from "react";
+import Image from "next/image";
 
-import Logo from "../../public/Logo.png"
+import Logo from "@/public/Logo.png";
 
 const Loading = () => {
   return (
@@ -13,7 +13,7 @@ const Loading = () => {
         </p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Loading
+export default Loading;

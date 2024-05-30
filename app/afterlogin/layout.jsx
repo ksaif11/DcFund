@@ -1,5 +1,4 @@
 import { Epilogue } from "next/font/google";
-import "react-toastify/dist/ReactToastify.css";
 
 import "./globals.css";
 import { Layout, Providers } from "@/components/afterlogin/index";

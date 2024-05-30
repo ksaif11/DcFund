@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 
 import { Card } from "@/components/afterlogin/index";
-import Logo from "/public/Logo.png";
-import { useEthersContext } from "../../../context/EthersContext";
+import Logo from "@/public/Logo.png";
+import { useEthersContext } from "@/context/EthersContext";
 
 const Account = () => {
   const { signer } = useEthersContext();

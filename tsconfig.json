@@ -48,7 +48,8 @@
     "app/afterlogin/campaigns/[title]/page.jsx",
     "app/afterlogin/search/page.jsx",
     "app/afterlogin/create/page.jsx",
-    "context/index.jsx"
+    "context/index.jsx",
+    "app/afterlogin/search/pagejsx"
   ],
   "exclude": ["node_modules", "prettier"]
 }
