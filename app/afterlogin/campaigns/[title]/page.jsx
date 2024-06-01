@@ -7,13 +7,10 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { FaEthereum } from "react-icons/fa";
 
-import getDaysLeft from "../../../../utils/getDaysLeft";
-import Logo from "../../../../public/Logo.png";
-import {
-  ClientButton,
-  FormInput,
-} from "../../../../components/afterlogin/index";
-import { useEthersContext } from "../../../../context/EthersContext";
+import getDaysLeft from "@/utils/getDaysLeft";
+import Logo from "@/public/Logo.png";
+import { ClientButton, FormInput } from "@/components/afterlogin/index";
+import { useEthersContext } from "@/context/EthersContext";
 
 const CampaignDetails = () => {
   const router = useRouter();

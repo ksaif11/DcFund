@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 import Card from "@/components/afterlogin/Card";
-import Logo from "../../public/Logo.png";
+import Logo from "@/public/Logo.png";
 
 const fetchCampaigns = async () => {
   const res = await fetch(`http://localhost:3000/api/campaigns`, {
