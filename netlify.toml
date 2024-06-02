@@ -1,9 +1,4 @@
 [build]
-  command = "npm run prebuild && npm run build"
-  publish = "out"
+  command = "npm install --force && npm run build"
+  publish = ".next"
 
-[build.environment]
-  NODE_ENV = "production"
-
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
