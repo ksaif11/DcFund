@@ -1,5 +1,5 @@
 [build]
-  command = "npm run build"
+  command = "npm run prebuild && npm run build"
   publish = "out"
 
 [build.environment]
@@ -7,6 +7,3 @@
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
-
-[build.lifecycle]
-  onPreBuild = "npm install --force"
