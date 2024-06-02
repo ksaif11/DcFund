@@ -25,7 +25,7 @@ export default async function Campaigns({ searchParams }) {
 
   return (
     <>
-      <div className="bg-transparent">
+      <div className="bg-transparent mt-20">
         <h1 className="mb-4 text-xl">
           {!searchParams.sort
             ? `All Campaigns (${campaigns?.length ?? 0})`
@@ -34,14 +34,14 @@ export default async function Campaigns({ searchParams }) {
               : `Top Campaigns (${campaigns?.length ?? 0})`}
         </h1>
         {campaigns?.length === 0 ? (
-          <div className="mt-10 flex  flex-col justify-center gap-4">
+          <div className="flex flex-col justify-center gap-4">
             <h1 className="text-4xl font-semibold">No Campaigns Found</h1>
             <p className="text-neutral-400 text-lg">
               It looks like there are no campaigns created yet.
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+          <div className="mt-32 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
             {campaigns?.map((campaign) => (
               <Card campaign={campaign} key={campaign.id} />
               //check user prop

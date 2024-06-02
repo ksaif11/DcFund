@@ -61,7 +61,7 @@ export default function HomeCamp() {
   return (
     <>
       <div className="px-4 md:px-8 lg:px-16 bg-transparent">
-        <div className="mt-24 w-full rounded-lg p-8 md:p-8">
+        <div className="mt-28 w-full rounded-lg p-8 md:p-8">
           <div className="flex justify-center">
             <div>
               <div className="gap-15 flex items-end">
