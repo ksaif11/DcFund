@@ -15,7 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <html suppressHydrationWarning lang="en">
-      <head />
+      <Head />
 
       <body className="bg-black">
         <Appwrapper>
@@ -35,3 +35,4 @@ export default function RootLayout({
 
 import { Providers } from "./providers";
 import Home from "./afterlogin/page";
+import Head from "./head";

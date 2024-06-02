@@ -60,8 +60,8 @@ export default function HomeCamp() {
 
   return (
     <>
-      <div className="px-4 md:px-8 lg:px-16 bg-[#081232]">
-        <div className="mt-28 w-full rounded-lg bg-black p-8 md:p-8">
+      <div className="px-4 md:px-8 lg:px-16 bg-transparent">
+        <div className="mt-24 w-full rounded-lg p-8 md:p-8">
           <div className="flex justify-center">
             <div>
               <div className="gap-15 flex items-end">
@@ -78,19 +78,19 @@ export default function HomeCamp() {
             </div>
           </div>
           <div className="flex flex-col gap-4 sm:flex-row">
-            <div className="bg-neutral-700 w-full rounded-lg p-4">
+            <div className="bg-[#1D2144]  w-full rounded-lg p-4">
               <h5 className="mb-2 text-center">All Campaigns</h5>
               <p className="text-center text-2xl font-semibold">
                 {campaignCount}
               </p>
             </div>
-            <div className="bg-neutral-700 w-full rounded-lg p-4">
+            <div className="bg-[#1D2144] w-full rounded-lg p-4">
               <h5 className="mb-2 text-center">Total Donations</h5>
               <p className="text-center text-2xl font-semibold">
                 {donationCount}
               </p>
             </div>
-            <div className="bg-neutral-700 w-full rounded-lg p-4">
+            <div className="bg-[#1D2144] w-full rounded-lg p-4">
               <h5 className="mb-2 text-center">Collected Eth</h5>
               <p className="text-center text-2xl font-semibold">
                 {totalCollected}
@@ -98,7 +98,6 @@ export default function HomeCamp() {
             </div>
           </div>
         </div>
-        <h1 className="mb-4 text-xl text-center">Most Popular Campaigns</h1>
         {campaigns.length === 0 ? (
           <div className="mt-10 flex flex-col justify-center gap-4 items-center">
             <h1 className="text-4xl font-semibold">No Campaigns Found</h1>

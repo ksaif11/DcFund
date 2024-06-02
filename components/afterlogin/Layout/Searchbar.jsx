@@ -16,7 +16,7 @@ const Searchbar = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="mb-32 flex w-full items-center font-semibold sm:max-w-[280px] md:max-w-[400px]"
+      className="mb-12 flex w-full items-center font-semibold sm:max-w-[280px] md:max-w-[400px]"
     >
       <input
         value={search}

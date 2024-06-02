@@ -8,7 +8,6 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 import { app } from "../app/firebase/firebaseConfig";
-import { useRouter } from "next/router";
 
 // Create a context with an initial value
 const AppContext = createContext(null);
@@ -32,19 +31,13 @@ export function Appwrapper({ children }) {
   };
 
   // Popup sign-in with Google
-
-  function SignUpWithGoogle() {
-    const router = useRouter();
-    signInWithPopup(auth, googleAuthProvider)
-      .then((response) => {
-        // Redirect to a different page after successful sign-in
-        router.replace("/afterlogin");
-      })
-      .catch((error) => {
-        console.error("Error signing in with Google: ", error);
-      });
-    return <></>;
-  }
+  const signUpWithGoogle = () => {
+    signInWithPopup(auth, googleAuthProvider).then((response) => {
+      // Redirect to a different page after successful sign-in
+      window.location.href = "/"; // For client-side routing
+      // console.log(response.user);
+    });
+  };
 
   // Logout function
   const logout = () => {
@@ -68,7 +61,7 @@ export function Appwrapper({ children }) {
 
   // Provide the context value to the children
   return (
-    <AppContext.Provider value={{ user, signInUser, SignUpWithGoogle, logout }}>
+    <AppContext.Provider value={{ user, signInUser, signUpWithGoogle, logout }}>
       {children}
     </AppContext.Provider>
   );
