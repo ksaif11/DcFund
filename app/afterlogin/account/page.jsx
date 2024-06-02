@@ -1,16 +1,19 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
+import Loading from "../loading";
 
 import { Card } from "@/components/afterlogin/index";
 import Logo from "@/public/Logo.png";
 import { useEthersContext } from "@/context/EthersContext";
 
-const Account = () => {
+export default function Account() {
   const { signer } = useEthersContext();
   const [campaigns, setCampaigns] = useState(null);
   const [totalCollected, setTotalCollected] = useState(0);
   const [totalWithdrawn, setTotalWithdrawn] = useState(0);
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     const fetchCampaigns = async () => {
@@ -107,6 +110,12 @@ const Account = () => {
       </div>
     </main>
   );
-};
+}
 
-export default Account;
+// export default function Account() {
+//   return (
+//     <Suspense fallback={<Loading />}>
+//       <Acnt />
+//     </Suspense>
+//   );
+// }

@@ -2,7 +2,7 @@ import React from "react";
 
 import { Card } from "@/components/afterlogin/index";
 
-const findCampaigns = async (query) => {
+async function findCampaigns(query) {
   if (!query) return null;
 
   const words = query.split(" ");
@@ -34,9 +34,9 @@ const findCampaigns = async (query) => {
   });
 
   return [...priorityCampaigns, ...otherCampaigns];
-};
+}
 
-const SearchPage = async ({ searchParams }) => {
+export default async function SearchPage({ searchParams }) {
   const campaigns = await findCampaigns(searchParams.q);
 
   if (campaigns === null)
@@ -68,6 +68,12 @@ const SearchPage = async ({ searchParams }) => {
       )}
     </div>
   );
-};
+}
 
-export default SearchPage;
+// export default function SearchPage() {
+//   return (
+//     <Suspense fallback={<div>Loading...</div>}>
+//       <Search />
+//     </Suspense>
+//   );
+// }

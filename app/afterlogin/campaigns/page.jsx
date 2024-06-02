@@ -1,4 +1,6 @@
 import { Card } from "@/components/afterlogin/index";
+import React from "react";
+import Loading from "../loading";
 
 const fetchCampaigns = async (sort) => {
   const res = await fetch(`http://localhost:3000/api/campaigns`, {
@@ -18,11 +20,11 @@ const fetchCampaigns = async (sort) => {
   return tops;
 };
 
-const Campaigns = async ({ searchParams }) => {
+export default async function Campaigns({ searchParams }) {
   const campaigns = await fetchCampaigns(searchParams.sort);
 
   return (
-    <div>
+    <div className="bg-[#081232]">
       <h1 className="mb-4 text-xl">
         {!searchParams.sort
           ? `All Campaigns (${campaigns?.length ?? 0})`
@@ -47,6 +49,11 @@ const Campaigns = async ({ searchParams }) => {
       )}
     </div>
   );
-};
-
-export default Campaigns;
+}
+// export default function Campaigns() {
+//   return (
+//     <Suspense fallback={<Loading />}>
+//       <Camps />
+//     </Suspense>
+//   );
+// }

@@ -25,18 +25,19 @@ const Hero = () => {
                       fontSize: "53px",
                     }}
                   >
-                    DcFund 
-                  </span>{" "}:
+                    DcFund
+                  </span>{" "}
+                  :
                   <br />
                   <span style={{}} className=" md:text-5xl">
                     Revolutionizing Crowdfunding in the Decentralized Era -
-                    Empowering Dreams, One Blockchain at a Time!
+                    Empowering Dreams!
                   </span>
                 </h1>
                 <p className="mb-12 text-base font-medium !leading-relaxed text-body-color dark:text-white dark:opacity-90 sm:text-lg md:text-xl">
-                  Join our innovative platform to support and create projects
-                  that shape the future. Empower change, explore opportunities,
-                  and make your mark in the decentralized world of fundraising.
+                  Join our innovative platform to support and create campaigns.
+                  Empower change, explore opportunities, and make your mark in
+                  the decentralized world of fundraising.
                 </p>
                 <div className="flex flex-col items-center justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
                   <Link
