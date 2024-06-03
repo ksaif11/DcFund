@@ -1,10 +1,13 @@
-import { Epilogue } from "next/font/google";
+// import { Epilogue } from "next/font/google";
 import "react-toastify/dist/ReactToastify.css";
 
 import "./globals.css";
 import { Layout, Providers } from "@/components/afterlogin/index";
 
-const epilogue = Epilogue({ subsets: ["latin"] });
+import { Suspense } from "react";
+import Loading from "./loading";
+
+// const epilogue = Epilogue({ subsets: ["latin"] });
 
 export const metadata = {
   title: "DC Fund",
@@ -14,11 +17,13 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={`${epilogue.className} dark:bg-black`}>
-        <Providers>
-          <Layout>{children}</Layout>
-        </Providers>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`bg-[#081232]`}>
+        <Suspense fallback={<Loading />}>
+          <Providers>
+            <Layout>{children}</Layout>
+          </Providers>
+        </Suspense>
       </body>
     </html>
   );

@@ -21,7 +21,7 @@ const Sidebar = () => {
   return (
     <aside className="sticky left-4 top-0 pt-32  hidden h-full flex-col bg-black md:flex">
       <Link
-        href="/"
+        href={`/`}
         className="bg-neutral-800 mb-4  flex items-center justify-center rounded-lg p-2"
       >
         <Image src={Logo} alt="dcfund" priority width={40} height={90} />

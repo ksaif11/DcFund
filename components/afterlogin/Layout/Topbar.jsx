@@ -33,17 +33,18 @@ const Topbar = () => {
   }, [drawerRef]);
 
   return (
-    <div className="mt-30 sticky top-20  flex w-full flex-col-reverse items-center justify-between  bg-[#13131a] pb-4 sm:flex-row md:relative md:bg-transparent md:pb-0">
+    <div className="sticky top-28 flex w-full flex-col-reverse items-center justify-between bg-[#13131a] pb-4 sm:flex-row md:relative md:bg-transparent md:pb-0">
       <Link href="/" className="hidden rounded-lg p-2 sm:block md:hidden">
         <Image src={Logo} alt="dcfund" priority width={40} height={40} />
       </Link>
-
-      <Searchbar />
+      <div className="flex items-center justify-center">
+        <Searchbar />
+      </div>
 
       {/* LARGE SCREEN */}
       <div className="hidden md:block">
         {signer ? (
-          <div className="flex items-center ">
+          <div className="flex items-center justify-center">
             <ClientButton
               onClick={() => router.push("/afterlogin/create")}
               loading={loading}

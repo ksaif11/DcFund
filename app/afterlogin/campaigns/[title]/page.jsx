@@ -7,15 +7,12 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { FaEthereum } from "react-icons/fa";
 
-import getDaysLeft from "../../../../utils/getDaysLeft";
-import Logo from "../../../../public/Logo.png";
-import {
-  ClientButton,
-  FormInput,
-} from "../../../../components/afterlogin/index";
-import { useEthersContext } from "../../../../context/EthersContext";
+import getDaysLeft from "@/utils/getDaysLeft";
+import Logo from "@/public/Logo.png";
+import { ClientButton, FormInput } from "@/components/afterlogin/index";
+import { useEthersContext } from "@/context/EthersContext";
 
-const CampaignDetails = () => {
+export default function CampaignDetails() {
   const router = useRouter();
   const { selectedCampaign: campaign, contract } = useEthersContext();
   const [amount, setAmount] = useState(0);
@@ -28,7 +25,7 @@ const CampaignDetails = () => {
     campaign.donations.sort((a, b) => b.amount - a.amount);
     const tops = campaign.donations.slice(0, 10);
     setTopDonations(tops);
-  }, []);
+  }, [campaign, router]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -55,9 +52,9 @@ const CampaignDetails = () => {
 
   return (
     <main>
-      <div className="flex flex-col gap-4 md:flex-row">
+      <div className="flex flex-col gap-4 md:flex-row bg-[#081232]">
         <div className="md:max-h-none h-full max-h-[300px] w-full md:h-[400px] xl:h-[500px]">
-          <img
+          <Image
             className="md:max-h-none h-full max-h-[300px] w-full rounded-lg object-cover"
             src={campaign?.imageUrl}
             alt={campaign?.title}
@@ -178,6 +175,4 @@ const CampaignDetails = () => {
       </div>
     </main>
   );
-};
-
-export default CampaignDetails;
+}

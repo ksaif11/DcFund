@@ -1,6 +1,6 @@
 {
-  "name": "startup-nextjs-template",
-  "version": "1.0.0",
+  "name": "dc-fund",
+  "version": "1.4.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -12,9 +12,9 @@
     "@next/font": "^14.2.3",
     "bufferutil": "^4.0.8",
     "dotenv": "^16.4.5",
-    "eslint": "^9.2.0",
-    "eslint-config-next": "^14.2.3",
-    "ethers": "^6.12.1",
+    "eslint": "^8.0.0",
+    "eslint-config-next": "^13.5.0",
+    "ethers": "^5.7.2",
     "firebase": "^10.7.0",
     "html-minifier": "^4.0.0",
     "js-cookie": "^3.0.5",
